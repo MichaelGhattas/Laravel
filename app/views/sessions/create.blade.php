@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        {{ Form::open(['route' => 'admin.sessions.store']) }}
+        {{ Form::open(['route' => 'sessions.store']) }}
         <div>
             {{ Form::label('email','Email:'); }}
             {{ Form::email('email'); }}

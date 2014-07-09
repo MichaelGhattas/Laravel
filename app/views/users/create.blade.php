@@ -4,7 +4,7 @@
 
 <h2>Create user</h2>
 
-{{ Form::open(['route' => 'admin.users.store']) }}
+{{ Form::open(['route' => 'users.store']) }}
 <div>
     {{ Form::label('firstName','First Name: ') }}
     {{ Form::input('text','firstName') }}

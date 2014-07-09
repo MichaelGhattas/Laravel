@@ -17,8 +17,9 @@ Route::get('logout', 'SessionsController@destroy');
 Route::resource('sessions', 'SessionsController');
 
 
+
 Route::group(array('before'=>'auth'), function() {   
-    Route::resource('admin.users', 'UsersController');
+    Route::resource('users', 'UsersController');
     Route::get('admin',function(){
     return 'Admin page';
 });
