@@ -16,11 +16,26 @@ Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
 Route::resource('sessions', 'SessionsController');
 
+//AUTHENTICATE USER
+Route::group(array('before'=>'auth'), function() {
+    
+    
+});
 
-
-Route::group(array('before'=>'auth'), function() {   
+//AUTHENTICATE ADMIN
+Route::group(array('before'=>'auth'), function() {
+    if(!Auth::user())
+        Redirect::to ('login');
+    else{
+    if(Auth::user()->isAdmin == 1){
     Route::resource('users', 'UsersController');
     Route::get('admin',function(){
     return 'Admin page';
-});
+    
+    });
+    }else{
+        return 'You are logged in but not an admin';
+    }
+    }
+    
 });
