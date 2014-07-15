@@ -9,18 +9,18 @@
 class Measurement extends Eloquent{
     protected $table = 'measurements';
     
-    protected $fillable = ['measurementType_id', 'cm', 'inches', 'eu', 'us'];
+    protected $fillable = ['sizes_id', 'measurementType_id', 'cm', 'inch', 'eu', 'us'];
 
     public $errors;
     
     public static $rules = [
       'measurementType_id'=>'required|numeric', 'cm' => 'required|numeric'
-        ,'inches'=>'required|numeric', 'eu' =>'numeric', 'us' => 'numeric'
+        ,'inch'=>'required|numeric', 'eu' =>'numeric', 'us' => 'numeric'
     ];
     
-    public function user()
+    public function size()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('Size');
     }
     
     public function isValid(){

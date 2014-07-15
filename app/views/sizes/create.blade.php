@@ -28,29 +28,6 @@
     {{ $errors->first('letterSizes_id') }}
     
 </div>
-<!--<div>
-    <h2>Add measurements</h2>
-    
-    {{ Form::label('measurementType_id','Type: ') }}
-    {{ Form::select('measurementType_id', $measurementType); }}
-    {{ $errors->first('measurementType_id') }}
-    
-    {{ Form::label('cm','CM: ') }}
-    {{ Form::input('text','cm') }}
-    {{ $errors->first('cm') }}
-    
-    {{ Form::label('inches','INCHES: ') }}
-    {{ Form::input('text','inches') }}
-    {{ $errors->first('inches') }}
-    
-    {{ Form::label('eu','EU: ') }}
-    {{ Form::input('text','eu') }}
-    {{ $errors->first('eu') }}
-    
-    {{ Form::label('us','US: ') }}
-    {{ Form::input('text','us') }}
-    {{ $errors->first('us') }}
-</div>-->
 <div>
     {{ Form::submit('Submit') }}
 </div>

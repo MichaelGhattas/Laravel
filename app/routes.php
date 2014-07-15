@@ -31,6 +31,7 @@ Route::group(array('before'=>'auth'), function() {
     if(Auth::user()->isAdmin == 1){
         Route::resource('users', 'UsersController');
         Route::resource('sizes', 'SizesController');
+        Route::resource('sizes.measurements', 'MeasurementsController');
         Route::get('admin',function(){
     return 'Admin page';
     

@@ -41,26 +41,6 @@ class SizesController extends BaseController {
     
     public function store(){
         
-        //$size = Input::except('measurementType_id','cm','inches','eu','us');
-        //$measurement = Input::except('garments_id','brands_id','regions_id','demographics_id','letterSizes_id');
-        
-        /*if(!$this->size->fill($size)->isValid() && !$this->measurement->fill($measurement)->isValid()){
-            
-            $errors = array_merge(($this->size->errors->toArray()), ($this->measurement->errors->toArray()));;
-            return $errors;
-            return Redirect::back()->withInput()->withErrors($errors);
-            
-        }  else  if(!$this->size->fill($size)->isValid()){
-            
-            return $this->size->errors;
-            return Redirect::back()->withInput()->withErrors($this->size->errors);
-            
-        } else if(!$this->measurement->fill($measurement)->isValid()){
-            
-            return Redirect::back()->withInput()->withErrors($this->measurement->errors);
-            
-        }*/
-        
         $size = Input::all();
         if(!$this->size->fill($size)->isValid()){
             
@@ -78,17 +58,6 @@ class SizesController extends BaseController {
         $size->letterSizes_id = Input::get('letterSizes_id');
         
         $size->save();
-        
-        /*$measurements = new Measurement;
-        
-        $measurement->measurementType_id = Input::get('measurementType_id');
-        $measurement->size_id = Input::get('size_id');
-        $measurement->cm = Input::get('cm');
-        $measurement->inches = Input::get('inches');
-        $measurement->eu = Input::get('eu');
-        $measurement->us = Input::get('us');
-        
-        $measurement->save();*/
         
         Return Redirect::route('sizes.index');
     }
