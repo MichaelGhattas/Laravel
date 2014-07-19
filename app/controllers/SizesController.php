@@ -64,8 +64,9 @@ class SizesController extends BaseController {
     
     public function show($id){
         $size = $this->size->find($id);
+        $measurements = Measurement::where('sizes_id', $id)->get();
         return View::make('sizes.show',['size' => $size, 'garments'=>$this->garments,'brands' => $this->brands, 'regions' => $this->regions, 'demographics' => $this->demographics
-                , 'letterSizes' => $this->letterSizes, 'measurementType' => $this->measurementType]);
+                , 'letterSizes' => $this->letterSizes, 'measurementType' => $this->measurementType, 'measurements' => $measurements]);
     }
     
     public function edit($id){

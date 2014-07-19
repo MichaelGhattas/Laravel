@@ -1,3 +1,7 @@
+@extends('layout.admin');
+
+@section('content')
+
 <h1>Show Measurement, Non editable</h1>
 
 {{ Form::model($measurement) }}
@@ -35,3 +39,5 @@
 </div>
 
 {{ Form::close(); }}
+
+@stop

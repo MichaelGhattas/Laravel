@@ -8,8 +8,6 @@
 <a href="/sizes/{{$size->id}}"><li>{{ 'ID = '.$size->id.', Brand = '.$size->brands_id.', Region = '.$size->regions_id; }}</li></a>
 @endforeach
 
-@stop
+<a href="/sizes/create">Create new size</a>
 
-@section('footer')
-<h1>footer</h1>
 @stop

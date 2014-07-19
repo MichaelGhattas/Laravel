@@ -1,3 +1,7 @@
+@extends('layout.admin');
+
+@section('content')
+
 <h1>Hello {{ $user->firstName.' '.$user->secondName; }}</h1>
 <p>Email = {{ $user->email; }}</p>
 
@@ -8,3 +12,5 @@
 </div>
 
 {{ Form::close(); }}
+
+@stop

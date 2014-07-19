@@ -28,7 +28,7 @@ class SessionsController extends BaseController{
     
     public function store(){
         if(Auth::attempt(Input::only('email','password'))){
-            return 'Welcome'.Auth::user()->firstName;
+            return Redirect::to('/admin');
         }else{
             return Redirect::back()->withInput();
         }

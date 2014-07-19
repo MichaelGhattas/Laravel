@@ -1,3 +1,7 @@
+@extends('layout.admin');
+
+@section('content')
+
 <h1>Show size, Non editable</h1>
 <p>Size ID = {{ $size->id; }}</p>
 
@@ -32,4 +36,13 @@
     {{ Form::submit('Delete') }}
 </div>
 
+<div>
+    <h3>Measurements</h3>
+    @foreach ($measurements as $measurement)
+    <a href="/sizes/{{$size->id}}/measurements/{{$measurement->id}}/"><li>{{ 'ID = '.$measurement->id.', CM = '.$measurement->cm.', Inch = '.$measurement->inch.'Meas type = '.$measurementType[$measurement->measurementType_id]; }}</li></a>
+    @endforeach
+</div>
+
 {{ Form::close(); }}
+
+@stop

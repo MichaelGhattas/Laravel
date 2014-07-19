@@ -33,9 +33,9 @@ Route::group(array('before'=>'auth'), function() {
         Route::resource('sizes', 'SizesController');
         Route::resource('sizes.measurements', 'MeasurementsController');
         Route::get('admin',function(){
-    return 'Admin page';
+            return View::make('admin');
     
-    });
+        });
     }else{
         return 'You are logged in but not an admin';
     }

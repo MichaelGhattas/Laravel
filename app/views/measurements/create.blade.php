@@ -33,3 +33,5 @@
     {{ Form::submit('Submit') }}
 </div>
 {{ Form::close() }}
+
+@stop

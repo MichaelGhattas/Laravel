@@ -1,4 +1,4 @@
-@extends('layout.default');
+@extends('layout.admin');
 
 @section('content')
 
@@ -8,8 +8,4 @@
 <a href="/users/{{$user->id}}"><li>{{ $user->firstName; }}</li></a>
 @endforeach
 
-@stop
-
-@section('footer')
-<h1>footer</h1>
 @stop
