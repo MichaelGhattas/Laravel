@@ -120,44 +120,56 @@ class UserMeasurementsController extends BaseController {
     
     public function report($id){
         
+        //GET FAVORITE GARMENT SIZE & GET REQUIRED SIZE BY USER
         $favoriteSize = DB::table('sizes')->where('garments_id','=',Input::get('garments_id'))->where('brands_id', '=', Input::get('brands_id'),'AND')->where('regions_id', '=', Input::get('regions_id'),'AND')->where('demographics_id', '=', Input::get('demographics_id'),'AND')->where('letterSizes_id', '=', Input::get('letterSizes_id'),'AND')->get();
         $matches = DB::table('sizes')->where('garments_id','=',Input::get('garments_id'))->where('brands_id', '=', Input::get('match_brands_id'),'AND')->where('regions_id', '=', Input::get('match_regions_id'),'AND')->where('demographics_id', '=', Input::get('demographics_id'),'AND')->get();
                 
+        //IF EMPTY RETURN
         if(count($favoriteSize) == 0 || count($matches) == 0)
             return "Size or match does not exist";
         
-        //USE size[0]->id because in test phase
+        //GET MEASUREMENTS OF FAV SIZE
         $favMeasTypes = DB::table('measurements')->where('sizes_id', $favoriteSize[0]->id)->get();
         
-        $nbOfSizeMeasurements = count($favMeasTypes);
+        //GET TOTAL SIZE OF MEASUREMENTS OF FAVORITE GARMENT
+        $totalFavMeas = 0;
+        $totalMatMeas = 0;
         
+        foreach($favMeasTypes as $favMeas){
+            $totalFavMeas = $totalFavMeas + $favMeas->cm;
+        }
+        
+        $matchedLetterID = 0;
+        $minDiff = 123456;
+        
+        //LOOP THROUGH POSSIBLE SIZE MATCHES TO GET ALL THEIR MEASUREMENTS AND COMPARE
         foreach ($matches as $match){
             
+            //GET MEASUREMENTS OF CURRENT POSSIBLE MATCH
             $matchMeas = DB::table('measurements')->where('sizes_id', $match->id)->get();
-            $recommendedSize = 0;
-            $count = 0;
-            $matchCount = 0;
             
-            foreach($favMeasTypes as $favMeasType){
-                
-                if($favMeasType->cm == $matchMeas[$count]->cm){
-                    $matchCount++;
-                }
-                
-                $count++;
-                
+            //RESET TOTAL AND DIFF
+            $total = 0;
+            $diff = 0;
+            
+            foreach($matchMeas as $matchMea){
+                $total = $total + $matchMea->cm;
             }
             
-            if($matchCount == $nbOfSizeMeasurements){
-                $recommendedSize = $match->letterSizes_id;
-                break;
+            
+            $diff = abs($total - $totalFavMeas);
+            
+            if($minDiff > $diff || $minDiff = 123456){
+                $minDiff = $diff;
+                $matchedLetterID = $match->letterSizes_id;
+                $totalMatMeas = $total;
             }
             
         }
         
-        return View::make('usermeasurements.report', ['favMeas'=>$favMeasTypes, 'matchMeasTypes'=>$matchMeas,'recommendedSize'=>$recommendedSize,
+        return View::make('usermeasurements.report', ['favMeas'=>$favMeasTypes, 'matchMeasTypes'=>$matchMeas,
             'letterSizes' => $this->letterSizes, 'garments' => $this->garments,'brands' => $this->brands, 'brands_id' => Input::get('match_brands_id'),
-            'garments_id' => Input::get('garments_id'),'regions_id' => Input::get('match_regions_id'),'regions' => $this->regions]);
+            'garments_id' => Input::get('garments_id'),'regions_id' => Input::get('match_regions_id'),'regions' => $this->regions, 'totalFavMeas' => $totalFavMeas,'totalMatMeas' => $totalMatMeas, 'matchedLetterID' => $matchedLetterID]);
     }
     
 }
