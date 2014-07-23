@@ -2,10 +2,10 @@
 
 @section('content');
 
-<h2>Select criteria</h2>
+<h3>Match your size</h3>
 
-{{ Form::model($size,['action' => ['sizes.update',$size->id],'method' => 'PUT']) }}
-
+{{ Form::open(['action' => ['UserMeasurementsController@report',$userid],'method' => 'POST']) }}
+<h4>Favorite fit</h4>
 <div>
     {{ Form::label('garments_id','Garment: ') }}
     {{ Form::select('garments_id', $garments); }}
@@ -25,9 +25,20 @@
     
     {{ Form::label('letterSizes_id','Size letter: ') }}
     {{ Form::select('letterSizes_id', $letterSizes); }}
-    {{ $errors->first('letterSizes_id') }}
-    
+    {{ $errors->first('letterSizes_id') }}    
 </div>
+
+<h4>Match my size in this brand</h4>
+
+<div>
+    {{ Form::label('match_brands_id','Brand: ') }}
+    {{ Form::select('match_brands_id', $brands); }}
+    
+    {{ Form::label('match_regions_id','Region: ') }}
+    {{ Form::select('match_regions_id', $regions); }}
+
+</div>
+
 <div>
     {{ Form::submit('Submit') }}
 </div>

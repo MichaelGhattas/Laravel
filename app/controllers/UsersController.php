@@ -80,4 +80,4 @@ class UsersController extends BaseController {
         
         Return Redirect::route('users.index');
     }
-}
+ }

@@ -21,6 +21,10 @@ Route::get('/','HomeController@home');
 
 //AUTHENTICATE USER
 Route::group(array('before'=>'auth'), function() {
+    Route::resource('users', 'UsersController');
+    Route::get('users/{id}/match', 'UserMeasurementsController@match');
+    Route::post('users/{id}/report', 'UserMeasurementsController@report');
+    Route::resource('users.sizes', 'UserMeasurementsController');
 });
 
 //AUTHENTICATE ADMIN
@@ -29,7 +33,6 @@ Route::group(array('before'=>'auth'), function() {
         Redirect::to ('login');
     else{
     if(Auth::user()->isAdmin == 1){
-        Route::resource('users', 'UsersController');
         Route::resource('sizes', 'SizesController');
         Route::resource('sizes.measurements', 'MeasurementsController');
         Route::get('admin',function(){

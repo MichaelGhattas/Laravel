@@ -2,16 +2,16 @@
 
 @section('content');
 
-<h2>Select criteria</h2>
+<h2>Select Favorite Garment</h2>
 
-{{ Form::model($size,['action' => ['sizes.update',$size->id],'method' => 'PUT']) }}
-
+{{ Form::open(['action' => ['users.sizes.store',$userid]]) }}
+<h3>User ID = {{ $userid; }}</h3>
 <div>
     {{ Form::label('garments_id','Garment: ') }}
     {{ Form::select('garments_id', $garments); }}
     {{ $errors->first('garments_id') }}
     
-    {{ Form::label('brands_id','Brand: ') }}
+    {{ Form::label('brands_d','Brand: ') }}
     {{ Form::select('brands_id', $brands); }}
     {{ $errors->first('brands_id') }}
     

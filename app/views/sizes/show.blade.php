@@ -42,7 +42,7 @@
     <a href="/sizes/{{$size->id}}/measurements/{{$measurement->id}}/"><li>{{ 'ID = '.$measurement->id.', CM = '.$measurement->cm.', Inch = '.$measurement->inch.'Meas type = '.$measurementType[$measurement->measurementType_id]; }}</li></a>
     @endforeach
 </div>
-
+<a href="/sizes/{{ $size->id}}/measurements/create">Add</a>
 {{ Form::close(); }}
 
 @stop

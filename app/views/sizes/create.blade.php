@@ -11,7 +11,7 @@
     {{ Form::select('garments_id', $garments); }}
     {{ $errors->first('garments_id') }}
     
-    {{ Form::label('brands_d','Brand: ') }}
+    {{ Form::label('brands_id','Brand: ') }}
     {{ Form::select('brands_id', $brands); }}
     {{ $errors->first('brands_id') }}
     
