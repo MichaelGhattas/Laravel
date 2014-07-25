@@ -145,18 +145,10 @@ class UserMeasurementsController extends BaseController {
         //LOOP THROUGH POSSIBLE SIZE MATCHES TO GET ALL THEIR MEASUREMENTS AND COMPARE
         foreach ($matches as $match){
             
-            //GET MEASUREMENTS OF CURRENT POSSIBLE MATCH
+            //GET MEASUREMENTS OF CURRENT POSSIBLE MATCH (REMOVE)
             $matchMeas = DB::table('measurements')->where('sizes_id', $match->id)->get();
             
-            //RESET TOTAL AND DIFF
-            $total = 0;
-            $diff = 0;
-            
-            foreach($matchMeas as $matchMea){
-                $total = $total + $matchMea->cm;
-            }
-            
-            
+            $total = DB::table('measurements')->where('sizes_id', $match->id)->sum('cm');
             $diff = abs($total - $totalFavMeas);
             
             if($minDiff > $diff || $minDiff = 123456){
